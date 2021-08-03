@@ -16,14 +16,11 @@ export const UniversalStyle = createGlobalStyle`
     height: 100%;
   }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family:  'Oxygen',sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 `;
-
 
 const el = document.createElement('div');
 el.id = 'feedback-widget__' + Math.random().toString(36).slice(-5);
