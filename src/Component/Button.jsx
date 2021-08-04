@@ -6,7 +6,7 @@ import FeedbackComponent from './FeedbackComponent /FeedbackComponent ';
 const Button = styled.button`
   background-color: ${(props) => props.bg || 'hsl(240, 56%, 60%)'};
   border: none;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
   cursor: pointer;
   font-size: 1.5rem;
   position: fixed;
@@ -25,7 +25,7 @@ const Button = styled.button`
 `;
 const CustomButton = (props) => {
   const [flag, setFlag] = useState(false);
-  const { value, icon } = props;
+  const { icon } = props;
 
   const formToggleHandler = () => {
     setFlag((s) => !s);
@@ -35,8 +35,7 @@ const CustomButton = (props) => {
     <>
       {flag ? <FeedbackComponent /> : null}
       <Button onClick={formToggleHandler} bg={props.bg} right={props.right}>
-        {' '}
-        {value} {icon}
+        {icon}
       </Button>
     </>
   );

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomButton from './Component/Button';
 
 function App() {
+  const [user] = useState(window.init);
+  console.log(user);
   return (
     <div className="App">
-      <CustomButton value={'Feedback'} bg={'#d3d3d3'} icon="🎯" right={''} />
+      <CustomButton bg={user.bg} icon={'🎯'} />
     </div>
   );
 }
