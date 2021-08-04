@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 const Form = styled.form`
+  background-color: ${(props) => props.bgContainer || 'hsl(240, 56%, 60%)'};
   width: 22vw;
   margin: 0.8rem 0;
   right: 1rem;
@@ -45,8 +46,8 @@ const Div = styled.div`
 const Input = styled.input`
   padding: 0.5em;
   margin: 0.5em;
-  color: paleviol;
-  background: lightgray;
+
+  background-color: ${(props) => props.bgFeilds || 'lightgray'};
   border: none;
   border-radius: 3px;
   &:focus {
@@ -56,8 +57,7 @@ const Input = styled.input`
 const TextArea = styled.textarea`
   padding: 0.5em;
   margin: 0.5em;
-  color: paleviol;
-  background: lightgray;
+  background-color: ${(props) => props.bgFeilds || 'lightgray'};
   border: none;
   border-radius: 3px;
   &:focus {
@@ -81,10 +81,12 @@ const MinimizeButton = styled.button`
   color: red;
   right: 1.1rem;
   border-radius: 5px;
-  position: fixed;
+  right: 1rem;
   bottom: 30.5rem;
+  position: fixed;
 `;
-const FeedbackComponent = () => {
+const FeedbackComponent = (props) => {
+  console.log(props);
   const nameRef = useRef('');
   const emailRef = useRef('');
   const ratingRef = useRef('');
@@ -108,22 +110,56 @@ const FeedbackComponent = () => {
     <>
       <Div id="minimize">
         <MinimizeButton onClick={minimizeHandler}>-</MinimizeButton>
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} bgContainer={props.bgContainer}>
           <H1>TITLE</H1>
-          <Label>Name</Label>
-          <Input ref={nameRef} placeholder="Name..." />
-          <Label>Email</Label>
-          <Input ref={emailRef} placeholder="Email" type="email" />
+          {props.name && (
+            <>
+              <Label>Name</Label>
+              <Input
+                ref={nameRef}
+                placeholder="Name..."
+                bgFeilds={props.bgFeilds}
+              />
+            </>
+          )}
+          {props.email && (
+            <>
+              {' '}
+              <Label>Email</Label>
+              <Input
+                bgFeilds={props.bgFeilds}
+                ref={emailRef}
+                placeholder="Email"
+                type="email"
+              />{' '}
+            </>
+          )}
+          {props.desc && (
+            <>
+              {' '}
+              <Label>Description</Label>
+              <TextArea
+                bgFeilds={props.bgFeilds}
+                rows="4"
+                cols="40"
+                ref={descRef}
+                placeholder="Give us your valuable feedback"
+              />{' '}
+            </>
+          )}
+          {props.rating && (
+            <>
+              <Label>Rating</Label>
+              <Input
+                ref={ratingRef}
+                bgFeilds={props.bgFeilds}
+                type="range"
+                min="0"
+                max="5"
+              />
+            </>
+          )}
 
-          <Label>Description</Label>
-          <TextArea
-            rows="4"
-            cols="40"
-            ref={descRef}
-            placeholder="Give us your valuable feedback"
-          />
-          <Label>Rating</Label>
-          <Input ref={ratingRef} type="range" min="0" max="5" />
           <Button type="submit">SUBMIT</Button>
         </Form>
       </Div>

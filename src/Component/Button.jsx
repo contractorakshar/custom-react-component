@@ -8,9 +8,9 @@ const Button = styled.button`
   border: none;
   padding: 0.5rem 2rem;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   position: fixed;
-  right: ${(props) => props.right || '1rem'};
+  right: 1rem;
 
   bottom: 1rem;
   border-radius: 8px;
@@ -25,16 +25,20 @@ const Button = styled.button`
 `;
 const CustomButton = (props) => {
   const [flag, setFlag] = useState(false);
-  const { icon } = props;
+  const { icon, ...otherProps } = props;
 
   const formToggleHandler = () => {
-    setFlag((s) => !s);
+    if (props.disableWidget) {
+      alert('Sorry Service is currently unavailable');
+    } else {
+      setFlag((s) => !s);
+    }
   };
 
   return (
     <>
-      {flag ? <FeedbackComponent /> : null}
-      <Button onClick={formToggleHandler} bg={props.bg} right={props.right}>
+      {flag ? <FeedbackComponent {...otherProps} /> : null}
+      <Button onClick={formToggleHandler} bg={props.bg}>
         {icon}
       </Button>
     </>
